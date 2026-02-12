@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_netflix_responsive_ui/models/models.dart';
 
 class Previews extends StatelessWidget {
   final String title;
   final List<Content> contentList;
-
-  const Previews({
-    Key key,
-    @required this.title,
-    @required this.contentList,
-  }) : super(key: key);
+  const Previews({super.key, required this.title, required this.contentList});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +30,6 @@ class Previews extends StatelessWidget {
               horizontal: 8.0,
             ),
             scrollDirection: Axis.horizontal,
-            itemCount: contentList.length,
             itemBuilder: (BuildContext context, int index) {
               final Content content = contentList[index];
               return GestureDetector(
@@ -50,18 +43,18 @@ class Previews extends StatelessWidget {
                       width: 130.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(content.imageUrl),
+                          image: AssetImage(content.imageUrl!),
                           fit: BoxFit.cover,
                         ),
                         shape: BoxShape.circle,
-                        border: Border.all(color: content.color, width: 4.0),
+                        border: Border.all(color: content.color!, width: 4.0),
                       ),
                     ),
                     Container(
                       height: 130.0,
                       width: 130.0,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           colors: [
                             Colors.black87,
                             Colors.black45,
@@ -71,8 +64,8 @@ class Previews extends StatelessWidget {
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                         ),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: content.color, width: 4.0),
+                        // shape: BoxShape.circle,
+                        // border: Border.all(color: content.color!, width: 4.0),
                       ),
                     ),
                     Positioned(
@@ -81,13 +74,14 @@ class Previews extends StatelessWidget {
                       bottom: 0,
                       child: SizedBox(
                         height: 60.0,
-                        child: Image.asset(content.titleImageUrl),
+                        child: Image.asset(content.titleImageUrl!),
                       ),
                     ),
                   ],
                 ),
               );
             },
+            itemCount: contentList.length,
           ),
         ),
       ],

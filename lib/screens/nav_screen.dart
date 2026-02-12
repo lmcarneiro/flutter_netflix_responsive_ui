@@ -5,8 +5,10 @@ import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
 
 class NavScreen extends StatefulWidget {
+  const NavScreen({super.key});
+
   @override
-  _NavScreenState createState() => _NavScreenState();
+  State<NavScreen> createState() => _NavScreenState();
 }
 
 class _NavScreenState extends State<NavScreen> {
@@ -17,7 +19,6 @@ class _NavScreenState extends State<NavScreen> {
     Scaffold(),
     Scaffold(),
   ];
-
   final Map<String, IconData> _icons = const {
     'Home': Icons.home,
     'Search': Icons.search,
@@ -25,9 +26,7 @@ class _NavScreenState extends State<NavScreen> {
     'Downloads': Icons.file_download,
     'More': Icons.menu,
   };
-
   int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,12 +39,15 @@ class _NavScreenState extends State<NavScreen> {
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.black,
               items: _icons
-                  .map((title, icon) => MapEntry(
+                  .map(
+                    (title, icon) => MapEntry(
                       title,
                       BottomNavigationBarItem(
+                        label: title,
                         icon: Icon(icon, size: 30.0),
-                        title: Text(title),
-                      )))
+                      ),
+                    ),
+                  )
                   .values
                   .toList(),
               currentIndex: _currentIndex,

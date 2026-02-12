@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_netflix_responsive_ui/assets.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
 
 class CustomAppBar extends StatelessWidget {
   final double scrollOffset;
 
-  const CustomAppBar({
-    Key key,
-    this.scrollOffset = 0.0,
-  }) : super(key: key);
+  const CustomAppBar({super.key, this.scrollOffset = 0.0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10.0,
-        horizontal: 24.0,
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 24.0),
+      color: Colors.black.withValues(
+        alpha: (scrollOffset / 350).clamp(0, 1).toDouble(),
       ),
-      color:
-          Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
       child: Responsive(
         mobile: _CustomAppBarMobile(),
         desktop: _CustomAppBarDesktop(),
@@ -44,14 +38,8 @@ class _CustomAppBarMobile extends StatelessWidget {
                   title: 'TV Shows',
                   onTap: () => print('TV Shows'),
                 ),
-                _AppBarButton(
-                  title: 'Movies',
-                  onTap: () => print('Movies'),
-                ),
-                _AppBarButton(
-                  title: 'My List',
-                  onTap: () => print('My List'),
-                ),
+                _AppBarButton(title: 'Movies', onTap: () => print('Movies')),
+                _AppBarButton(title: 'My List', onTap: () => print('My List')),
               ],
             ),
           ),
@@ -73,62 +61,43 @@ class _CustomAppBarDesktop extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _AppBarButton(
-                  title: 'Home',
-                  onTap: () => print('Home'),
-                ),
+                _AppBarButton(title: 'Home', onTap: () => print('Home')),
                 _AppBarButton(
                   title: 'TV Shows',
                   onTap: () => print('TV Shows'),
                 ),
-                _AppBarButton(
-                  title: 'Movies',
-                  onTap: () => print('Movies'),
-                ),
-                _AppBarButton(
-                  title: 'Latest',
-                  onTap: () => print('Latest'),
-                ),
-                _AppBarButton(
-                  title: 'My List',
-                  onTap: () => print('My List'),
-                ),
+                _AppBarButton(title: 'Movies', onTap: () => print('Movies')),
+                _AppBarButton(title: 'Latest', onTap: () => print('Latest')),
+                _AppBarButton(title: 'My List', onTap: () => print('My List')),
               ],
             ),
           ),
-          const Spacer(),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(Icons.search),
-                  iconSize: 28.0,
-                  color: Colors.white,
                   onPressed: () => print('Search'),
-                ),
-                _AppBarButton(
-                  title: 'KIDS',
-                  onTap: () => print('KIDS'),
-                ),
-                _AppBarButton(
-                  title: 'DVD',
-                  onTap: () => print('DVD'),
-                ),
-                IconButton(
+                  icon: Icon(Icons.search),
                   padding: EdgeInsets.zero,
-                  icon: Icon(Icons.card_giftcard),
                   iconSize: 28.0,
                   color: Colors.white,
+                ),
+                _AppBarButton(title: 'KIDS', onTap: () => print('KIDS')),
+                _AppBarButton(title: 'DVD', onTap: () => print('DVD')),
+                IconButton(
                   onPressed: () => print('Gift'),
-                ),
-                IconButton(
+                  icon: Icon(Icons.card_giftcard),
                   padding: EdgeInsets.zero,
-                  icon: Icon(Icons.notifications),
                   iconSize: 28.0,
                   color: Colors.white,
+                ),
+                IconButton(
                   onPressed: () => print('Notifications'),
+                  icon: Icon(Icons.notifications),
+                  padding: EdgeInsets.zero,
+                  iconSize: 28.0,
+                  color: Colors.white,
                 ),
               ],
             ),
@@ -141,13 +110,8 @@ class _CustomAppBarDesktop extends StatelessWidget {
 
 class _AppBarButton extends StatelessWidget {
   final String title;
-  final Function onTap;
-
-  const _AppBarButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
-  }) : super(key: key);
+  final VoidCallback onTap;
+  const _AppBarButton({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
